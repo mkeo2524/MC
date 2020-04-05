@@ -5,7 +5,12 @@
     
         <button @click="handleClick()">Click me!</button>
     
-        <table id=MarkerTable></table>
+        <div style="overflow:scroll; height:400px;">
+    
+            <table id='MarkerTable' border-collapse='collapse' margin='auto'>
+            </table>
+    
+        </div>
     
     </div>
 </template>
@@ -20,7 +25,7 @@ export default {
             const data = await response.json();
             const table = document.getElementById('MarkerTable');
             data.markers.forEach((e) => {
-                const rowContent = `<tr><td>${e}</td></tr>`;
+                const rowContent = `<tr ><td>${e}</td></tr>`;
                 const row = document.createElement('tr');
                 row.innerHTML = rowContent;
                 table.append(row);
@@ -49,4 +54,13 @@ li {
 a {
     color: #42b983;
 }
+
+#MarkerTable {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    padding-top: 40px;
+}
+
 </style>
