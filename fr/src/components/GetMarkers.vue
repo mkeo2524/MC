@@ -4,20 +4,27 @@
         <h1>Marker Set Get API Test</h1>
     
         <button @click="handleClick()">Click me!</button>
+        <br><br><br><br>
     
-        <div style="overflow:scroll; height:400px;">
-    
-            <table id='MarkerTable' border-collapse='collapse' margin='auto'>
-            </table>
-    
+        <div>
+            <div id="table" style="float:left; overflow:scroll">
+                <table id='MarkerTable' border-collapse='collapse'>
+                </table>
+            </div>
+            <div id="landmark" style="float:right; margin-right:25%">
+                <Landmarks />
+            </div>
         </div>
-    
     </div>
 </template>
 
 <script>
+import Landmarks from './Landmarks.vue'
 export default {
     name: 'GetMarkers',
+    components: {
+        Landmarks
+    },
     methods: {
         async handleClick() {
             const url = 'http://127.0.0.1:5000/get';
@@ -55,12 +62,11 @@ a {
     color: #42b983;
 }
 
-#MarkerTable {
+#table {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 25%;
+    margin-left: 35%;
+    width: 5%;
     padding-top: 40px;
+    height: 500px;
 }
-
 </style>
