@@ -4,12 +4,7 @@
         <h1>Choose your essential landmarks</h1>
     
         <GetMarkers />
-    
 
-    
-    
-        
-    
     </div>
 </template>
 
@@ -35,8 +30,7 @@ export default {
     margin-top: 200px;
     top: 50%;
     left: 50%;
-    border: solid black 2px;
     overflow-wrap: break-word;
-    padding-bottom: 20px;
+    padding-bottom: 60px;
 }
 </style>

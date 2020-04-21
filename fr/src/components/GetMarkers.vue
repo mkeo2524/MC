@@ -6,7 +6,7 @@
     
         <button id='dataLoad' @click="handleLoadDataClick()">Load Data</button>
         <br><br><br><br>
-        <div id='container' style='margin-bottom: 500px;'>
+        <div id='container' style='margin-bottom: 600px;'>
             <div id="essentialMarker" class="split left" style="overflow:auto; height:400px; width:10%; padding-left:400px; float:left">
                 <table id='MarkerTable' class="markerClass" style="width:100%">
                 </table>

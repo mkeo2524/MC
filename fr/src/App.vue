@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div id="startingPage">
-            <h1>Hello how are you today</h1>
+            <h1>Map Client</h1>
             <GetFile />
             <button style="margin-top: 20px;" type="button" id="button" @click="goToEssential()">Next</button>
         </div>
@@ -10,22 +10,30 @@
         </div>
         <button style="margin-top: 20px;" type="button" id="button" @click="goToNonEssential()">Next</button>
         <div id="nonEssential">
-            <GetMarkers />
+            <NonEssential />
+        </div>
+        <button style="margin-top: 20px;" type="button" id="button" @click="goToTracking()">Next</button>
+        <div id="tracking">
+            <Tracking />
         </div>
     </div>
 </template>
 
 <script>
+
 import GetFile from './components/GetFile.vue'
 import Essential from './components/Essential.vue'
-import GetMarkers from './components/GetMarkers.vue'
+import NonEssential from './components/NonEssential.vue'
+import Tracking from './components/Tracking.vue'
+
 import $ from 'jquery'
 export default {
     name: 'App',
     components: {
         GetFile,
         Essential,
-        GetMarkers,
+        NonEssential,
+        Tracking,
     },
     methods: {
         async goToNonEssential() {
@@ -41,6 +49,15 @@ export default {
             $("button").click(function() {
                 $('html,body').animate({
                         scrollTop: $("#essential").offset().top
+                    },
+                    'slow');
+            });
+        },
+
+        async goToTracking() {
+            $("button").click(function() {
+                $('html,body').animate({
+                        scrollTop: $("#tracking").offset().top
                     },
                     'slow');
             });
@@ -61,7 +78,7 @@ export default {
 
 #nonEssential {
     width: 100%;
-    height: 1000px;
+    height: 700px;
     background: #E8E8E8;
 }
 
