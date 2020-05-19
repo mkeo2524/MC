@@ -2,29 +2,29 @@
     <div id="app">
         <div id="startingPage">
             <h1>Map Client</h1>
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad <br>minim veniam, quis nostrud exercitation ullamco laboris nisi 
+            ut aliquip ex ea commodo consequat. Duis aute irure <br>dolor in reprehenderit in voluptate velit esse cillum dolore eu 
+            fugiat nulla pariatur.<br> Excepteur sint occaecat cupidatat
+             non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+             <br>
+             <GetDemographics /><br><br>
             <GetFile />
-            <button style="margin-top: 20px;" type="button" id="button" @click="goToEssential()">Next</button>
+           
         </div>
-        <div id="essential">
-            <Essential />
-        </div>
-        <button style="margin-top: 20px;" type="button" id="button" @click="goToNonEssential()">Next</button>
-        <div id="nonEssential">
-            <NonEssential />
-        </div>
-        <button style="margin-top: 20px;" type="button" id="button" @click="goToTracking()">Next</button>
-        <div id="tracking">
-            <Tracking />
+        <div id="body">
+                <div id="essential">
+                    <Essential />
+                </div>
         </div>
     </div>
 </template>
 
 <script>
-
 import GetFile from './components/GetFile.vue'
 import Essential from './components/Essential.vue'
-import NonEssential from './components/NonEssential.vue'
-import Tracking from './components/Tracking.vue'
+import GetDemographics from './components/GetDemographics.vue'
+
 
 import $ from 'jquery'
 export default {
@@ -32,8 +32,7 @@ export default {
     components: {
         GetFile,
         Essential,
-        NonEssential,
-        Tracking,
+        GetDemographics,
     },
     methods: {
         async goToNonEssential() {
@@ -85,4 +84,8 @@ export default {
 #startingPage {
     height: 500px;
 }
+
+
+
+
 </style>

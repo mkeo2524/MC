@@ -2,21 +2,35 @@
 <template>
     <div class="getmarkers">
     
-        <h1>Marker Set Get API Test</h1>
-    
         <button id='dataLoad' @click="handleLoadDataClick()">Load Data</button>
         <br><br><br><br>
-        <div id='container' style='margin-bottom: 600px;'>
-            <div id="essentialMarker" class="split left" style="overflow:auto; height:400px; width:10%; padding-left:400px; float:left">
-                <table id='MarkerTable' class="markerClass" style="width:100%">
-                </table>
+        <div class='class1'>
+            <h1>Choose your essential Landmarks</h1>
+            <div id='container' style='margin-bottom: 430px;'>
+                <div id="essentialMarker" class="split left" style="overflow:auto; height:400px; width:40%; padding-left:30%; float:left">
+                    <table id='MarkerTable' class="markerClass" style="width:100%">
+                    </table>
+                </div>
             </div>
-            <div id="diagram" class="split right" style="width: 50%; float:right ">
-                <img src="..\assets\landmarks.jpg" alt="failed" style="height: 400px;">
+            <div id='nonEssentialMarker' style="position: relative;">
+                <button @click="onMoveToExtraLandmarks()">Upload</button>
             </div>
         </div>
-        <div id='nonEssentialMarker' style="position: relative;">
-            <button @click="onMoveToExtraLandmarks()">Upload</button>
+    
+        <div class='class2'>
+            <h1>Choose your tracking markers</h1>
+            <div id='container' style='margin-bottom: 430px;'>
+                <div id="trackingMarker" class="split left" style="overflow:auto; height:400px; width:40%; padding-left:30%; float:left">
+                    <table id='trackingTable' class="markerClass" style="width:100%">
+                    </table>
+                </div>
+            </div>
+            <div id='nonEssentialMarker' style="position: relative;">
+                <button @click="submitTracking()">Upload</button>
+            </div>
+        </div>
+        <div class='class3'>
+            <h1>hi</h1>
         </div>
     </div>
 </template>
@@ -55,15 +69,50 @@ export default {
                 $(this).find('input[type="submit"]').attr('disabled', 'disabled');
             });
         },
+        async submitTracking(){
+            var arr = [];
+            var selectedRows = $('#trackingTable .selected');
+            var i;
+            for (i = 0; i < selectedRows.length; i++) {
+                arr[i] = selectedRows[i].innerText;
+            }
+            $.post('http://127.0.0.1:5000/tracking', $.param({ data: arr }), console.log(arr))
+        },
 
         async onMoveToExtraLandmarks() {
-            var rows = $('#MarkerTable .selected');
-            console.log(rows);
-            const markers = rows.toArray()
-                .flatMap(row => row.cells.toArray())
-                .map(cell => cell.innerHTML);
-            console.log(markers);
-        }
+            var arr = [];
+            var selectedRows = $('#MarkerTable .selected');
+            var i;
+            for (i = 0; i < selectedRows.length; i++) {
+                arr[i] = selectedRows[i].innerText;
+            }
+            $.post('http://127.0.0.1:5000/markers', $.param({ data: arr }), console.log(arr))
+            var unselectedRows = []
+            const markerTable = document.getElementById('MarkerTable');
+            for (i = 0; i < document.getElementById('MarkerTable').rows.length; i++) {
+                var row = markerTable.rows[i]
+                if (arr.includes(row.innerText) == false) {
+                    unselectedRows.push(row.innerText)
+                }
+            }
+            $.post('http://127.0.0.1:5000/unselected', $.param({ data: unselectedRows }), console.log(unselectedRows))
+            const table = document.getElementById('trackingTable');
+            unselectedRows.forEach((e) => {
+                const rowContent = `<tr><td>${e}</td></tr>`;
+                const row = document.createElement('tr');
+                row.innerHTML = rowContent;
+                table.append(row);
+            });
+            $(document).ready(function() {
+                $('#trackingTable tr').click(function() {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected')
+                    } else {
+                        $(this).addClass('selected');
+                    }
+                });
+            });
+        },
 
     }
 }
@@ -122,5 +171,40 @@ table#MarkerTable {
 
 #MarkerTable td:hover {
     cursor: pointer;
+}
+
+table#trackingTable {
+    border-collapse: separate;
+    border-spacing: 4px;
+}
+
+#trackingTable tr {
+    background-color: #eee;
+    border-top: 1px solid #fff;
+}
+
+#trackingTable tr:hover {
+    background-color: #ccc;
+}
+
+#trackingTable th {
+    background-color: #fff;
+}
+
+#trackingTable th,
+#trackingTable td {
+    padding: 3px 5px;
+}
+
+#trackingTable td:hover {
+    cursor: pointer;
+}
+
+.class1,
+.class2,
+.class3 {
+    width: 33.33%;
+    float: left;
+    height: 100px;
 }
 </style>

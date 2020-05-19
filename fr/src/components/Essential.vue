@@ -1,10 +1,6 @@
 <template>
     <div class="page1">
-    
-        <h1>Choose your essential landmarks</h1>
-    
         <GetMarkers />
-
     </div>
 </template>
 
