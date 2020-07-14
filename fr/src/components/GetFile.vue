@@ -2,16 +2,52 @@
     <div class="getfile">
         <title>Upload new File Test</title>
         <h1>Upload new File</h1>
-        <form method=post action="http://127.0.0.1:5000/upload" enctype=multipart/form-data>
-            <input type=file name=file>
-            <input type=submit value=Upload>
-        </form>
+            <input id=fileInput type=file name=file>
+            <a href="#" v-on:click="submitForm">SUBMIT</a>
+            
     </div>
 </template>
 
 <script>
+
+import $ from 'jquery'
+
 export default {
-    name: 'GetFile'
+    name: 'GetFile',
+    components: {},
+    methods:{ 
+        async submitForm(){
+            var files = document.getElementById('fileInput').files
+            if (files.length < 1) {
+                alert("No file selected.")
+                return
+            }
+
+            var file = files[0]
+            if (file.name === '') {
+                alert("Invalid file name.")
+                return;
+            }
+
+            var requestContent = {
+                ["fileName"] : file.name,
+                ["fileContent"] : await file.text()
+            }
+
+            var json = JSON.stringify(requestContent)
+            alert(json)
+            $.post('http://127.0.0.1:5000/upload', json)
+
+            $.ajax ({
+                url: 'http://127.0.0.1:5000/upload',
+                type: "POST",
+                data: json,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                crossDomain: true
+            });
+        }
+    }
 }
 </script>
 
