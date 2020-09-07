@@ -34,7 +34,6 @@ def upload_file():
     if request.data == '':
         flash('No file part')
         return Response("{'message': 'No File Uploaded'}", status=400, mimetype='application/json')
-
     content = request.get_json()
     fileName = content["fileName"]
     fileContent = content["fileContent"]    # if user does not select file, browser also
@@ -85,8 +84,13 @@ def markers():
         with open(Path(os.getcwd() + "/official/" + str(key)+ ".csv"), "w", newline="") as f:
             writer = csv.writer(f, delimiter='\t')
             writer.writerows(markers)
-    return jsonify({'markers': markers})
+    response = jsonify()
+    response.status_code = 201
+    response.headers['location'] = '/markers/' + str(key)
+    response.autocorrect_location_header = False
+    return response
 
+    
 @app.route('/unselected', methods=['POST'])
 def unselected():
     unselected = request.form.getlist('data[]')
@@ -148,5 +152,30 @@ def demographics():
     age = request.form['age']
     gender = request.form['gender']
     print([patientID, mass, height, age, gender])
-    return redirect(request.referrer)
-    
+    return redirect('localhot:8080/')
+
+@app.route('/fieldworkoptions', methods=['POST', 'GET'])
+def fieldworks():
+    fieldworkOptions = request.form
+    print(fieldworkOptions)
+    return redirect('localhot:8080/')
+
+@app.route('/opensimoptions', methods=['POST', 'GET'])
+def opensim():
+    opensimOptions = request.form
+    print(opensimOptions)
+    return redirect('localhot:8080/')
+
+@app.route('/fieldMarkers', methods=['POST', 'GET'])
+def fieldMarkers():
+    fieldMarkers = request.form.getlist('data[]')
+    fieldMarkers = fieldMarkers[1:]
+    print(fieldMarkers)
+    return redirect('localhot:8080/')
+
+@app.route('/trackMarkers', methods=['POST', 'GET'])
+def trackMarkers():
+    trackMarkers = request.form.getlist('data[]')
+    trackMarkers = trackMarkers[1:]
+    print(trackMarkers)
+    return redirect('localhot:8080/')

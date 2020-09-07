@@ -25,10 +25,10 @@ import GetFile from './components/GetFile.vue'
 import Essential from './components/Essential.vue'
 import GetDemographics from './components/GetDemographics.vue'
 
-
 import $ from 'jquery'
 export default {
     name: 'App',
+    
     components: {
         GetFile,
         Essential,

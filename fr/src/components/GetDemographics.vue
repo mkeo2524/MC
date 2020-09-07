@@ -5,9 +5,10 @@
         <form method=post action="http://127.0.0.1:5000/demographics" enctype=multipart/form-data id="frm1">
     
             Patient ID: <input type="text" name="id"><br><br> 
-            Mass: <input type="number" name="mass"><br><br> 
-            Height: <input type="number" name="height"><br><br> 
-            Age: <input type="number" name="age"><br><br> 
+            Mass (m): <input type="number" name="mass"><br><br> 
+            Height (m): <input type="number" name="height"><br><br> 
+            Age: <input type="number" name="age"><br><br>
+            Knee Width (cm): <input type="number" name="knee"><br><br> 
             <input type="radio" id="male" name="gender" value="male">
 
             <label for="male">Male</label>
