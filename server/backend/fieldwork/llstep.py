@@ -113,7 +113,7 @@ class LLStepData(object):
                  'options':{'eps':1e-5},
                  }
 
-    def __init__(self, config, inputLM):
+    def __init__(self, config):
         """
         example config
         config['identifier'] = ''
@@ -133,7 +133,7 @@ class LLStepData(object):
 
         """
         self.config = config
-        self.inputLandmarks = inputLM # a dict of target landmark names : coordinates
+        self.inputLandmarks = None # a dict of target landmark names : coordinates
         # self._targetLandmarksNames = None # list of strings matching keys in self.inputLandmarks
         self._targetLandmarks = None
         self.LL = lowerlimbatlas.LowerLimbAtlas('lowerlimb')
