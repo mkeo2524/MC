@@ -723,7 +723,7 @@ class Gait2392GeomCustomiser(object):
             if(i[-1] == side):
 		        
                 #we need the joint location of the child joint in term of the main body coords
-                wrap = oldModel.wrapObjects[i]
+                wrap = oldModel.wrapObjects[i] 
                 point = np.array(wrap.translation)
                 
 

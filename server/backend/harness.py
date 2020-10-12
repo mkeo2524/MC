@@ -1,16 +1,17 @@
 import os
-
 from trcsource.trcdata import load
 from trcframe.trcframeselector import trcframeselect
-
+from zipoutput import output_zip
 from model import run
 
 # path to trc file
 path = os.environ('TRC_FILE') \
-    if os.environ('TRC_FILE') else r'C:\Users\mkeo2\Desktop\work material\server\trcs\StaticCalibration.trc'
+    if os.environ('TRC_FILE') else r'C:\Users\mkeo2\Desktop\MC\server\trcs\StaticCalibration.trc'
 osim_out_dir = os.environ('OSIM_OUTPUT_DIR') \
-    if os.environ('OSIM_OUTPUT_DIR') else r'C:\Users\mkeo2\Desktop\work material\server\backend\geom\osim'
+    if os.environ('OSIM_OUTPUT_DIR') else r'C:\Users\mkeo2\Desktop\MC\server\backend\geom\osim'
 
+path = r'C:\Users\mkeo2\Desktop\MC\server\trcs\StaticCalibration.trc'
+osim_out_dir = r'C:\Users\mkeo2\Desktop\MC\server\backend\geom\osim'
 trcData = load(path)  # load trc data
 trcFrame = trcframeselect(trcData, 100)  # get marker coordinates for all frames
 
@@ -49,3 +50,5 @@ muscle_config = {'osim_output_dir': osim_out_dir, 'in_unit': 'cm',
 
 if __name__ == "__main__":
     run(trcFrame, generation_config, geometry_config, muscle_config)
+    output_zip()
+

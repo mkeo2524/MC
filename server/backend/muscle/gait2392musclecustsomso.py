@@ -965,7 +965,7 @@ class gait2392MuscleCustomiser(object):
         wrapNames = ['PS_at_brim_l', 'IL_at_brim_l', 'PS_at_brim_r', 'IL_at_brim_r']
         joint = 'hip'
         wrapPoints = {'psoas_l':26, 'psoas_r':26, 'iliacus_l':4926, 'iliacus_r':26}
-    '''
+    
         for i in range(len(muscleNames)):
 		
             wrap = self.gias_osimmodel.wrapObjects[wrapNames[i]]
@@ -1031,7 +1031,7 @@ class gait2392MuscleCustomiser(object):
             #and needs to be moved to the closest point on the sphere
             if (d1>d2):
                 checkPoint.location = sphere[nodeNum] - trans
-	    '''
+	    
     def updateMarkerSet(self):
 
         ##create dictionary linking landmarks to bodies
